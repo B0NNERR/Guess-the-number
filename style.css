@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Press Start 2P", cursive;
+  font-size: 15px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+}
+
+.wrap {
+  color: #fff;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-again {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.head-right {
+  margin-right: 30px;
+}
+
+.heading {
+  margin-top: 50px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.box {
+  margin-top: 100px;
+  height: 10px;
+  background-color: #fff;
+  position: relative;
+}
+
+.box span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  font-size: 30px;
+  background-color: #fff;
+  padding: 20px 50px;
+  color: #000;
+  transform: translate(-50%, calc(-50% + 5px));
+}
+
+.content {
+  margin-top: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-left {
+  align-items: center;
+}
+
+#number {
+  width: 200px;
+  border: 3px solid #fff;
+  font-size: 50px;
+  background-color: transparent;
+  text-align: center;
+  padding: 20px 0;
+  color: #fff;
+  font-family: inherit;
+  text-align: center;
+}
+.btn-result {
+  margin-top: 50px;
+}
+#number:focus {
+  outline: none;
+}
+
+.content-right p:not(:last-child) {
+  margin-bottom: 30px;
+}
