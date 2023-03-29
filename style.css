@@ -78,6 +78,7 @@ body {
   justify-content: center;
   align-items: center;
   color: #fff;
+  column-gap: 200px;
 }
 
 .section-content__item-side {
@@ -86,7 +87,7 @@ body {
 }
 
 .section-content__item-side:not(:last-child) {
-  margin-right: 200px;
+  /* margin-right: 200px; */
   align-items: center;
 }
 
