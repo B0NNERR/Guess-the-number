@@ -9,27 +9,33 @@
   </head>
   <body>
     <div class="wrap">
-      <div class="head">
-        <button class="btn btn-again">Сначала!</button>
-        <span class="head-right"></span>
-      </div>
-      <h1 class="heading">Угадай Число!</h1>
+      <section class="section-head">
+        <button class="btn section-head__btn">Сначала!</button>
+        <div class="section-head__range"></div>
+      </section>
 
-      <div class="box">
-        <span>???</span>
-      </div>
+      <section class="section-title">
+        <h1 class="section-title__heading">Угадай число!</h1>
+        <div class="section-title__layout-wrap">
+          <div class="section-title__devider"></div>
+          <div class="section-title__layout">???</div>
+          <div class="section-title__devider"></div>
+        </div>
+      </section>
 
-      <div class="content">
-        <div class="content-item content-left">
-          <input type="number" name="number" id="number" value="0" />
-          <button class="btn btn-result">Проверить!</button>
+      <section class="section-content">
+        <div class="section-content__item-side">
+          <input type="number" name="number" id="number" />
+          <button class="btn section-content__btn">Проверить!</button>
         </div>
-        <div class="content-item content-right">
-          <p class="result">Начни угадывать!</p>
-          <p class="score">Очки: <span></span></p>
-          <p class="best-score">Лучший результат: <span>0</span></p>
+        <div class="section-content__item-side">
+          <div class="section-content__layout">Начни угадывать!</div>
+          <div class="section-content__score">Очки: <span></span></div>
+          <div class="section-content__best-score">
+            Лучший результат: <span>0</span>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
 
     <script src="test.js"></script>

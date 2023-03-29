@@ -1,68 +1,90 @@
 "use strict";
+
+// Код написан для практики, не задумывался об читабельности и аккуратности
+
 document.addEventListener("DOMContentLoaded", () => {
-  let check = document.querySelector(".btn-result");
-  let result = document.querySelector(".result");
-  let currentScore = document.querySelector(".score span");
-  let bestScoreHTML = document.querySelector(".best-score span");
-  let bestScore = 0;
-  let arr = [];
+  const titleLayout = document.querySelector(".section-title__layout");
+  const inputNumber = document.querySelector("#number");
+  const btnReset = document.querySelector(".section-head__btn");
+  const btnCalc = document.querySelector(".section-content__btn");
+  const textResult = document.querySelector(".section-content__layout");
+  const currentScore = document.querySelector(".section-content__score span");
+  const bestScore = document.querySelector(".section-content__best-score span");
+  const range = document.querySelector(".section-head__range");
+  const rangeNumbers = [];
+  let isPlayed = false;
 
-  currentScore.innerHTML = 20;
-
-  for (let i = 1; i <= 10; i++) {
-    arr.push(i);
+  for (let i = 1; i <= 20; i++) {
+    rangeNumbers.push(i);
   }
 
-  let randNumber = Math.round(
-    arr[0] - 0.5 + Math.random() * (arr.length - 1 - arr[0] + 1)
-  );
-
-  document.querySelector(".head-right").innerHTML = `< Между ${arr[0]} и ${
-    arr[arr.length - 1]
+  let randomNumber = getRandom();
+  let maxTry;
+  for (let i = 0; Math.pow(2, i) < rangeNumbers[rangeNumbers.length - 1]; i++) {
+    maxTry = i + 1;
+  }
+  currentScore.innerHTML = maxTry;
+  range.innerHTML = `< Между ${rangeNumbers[0]} и ${
+    rangeNumbers[rangeNumbers.length - 1]
   } >`;
 
-  function reset() {
-    result.innerHTML = `Начни угадывать!`;
-    currentScore.innerHTML = 20;
-    document.querySelector("#number").valueAsNumber = 0;
-    document.querySelector(".heading").innerHTML = `Угадай Число!`;
-    document.body.style.backgroundColor = `#000`;
-    randNumber = Math.round(
-      arr[0] - 0.5 + Math.random() * (arr.length - 1 - arr[0] + 1)
+  inputNumber.max = rangeNumbers[rangeNumbers.length - 1];
+  inputNumber.min = rangeNumbers[0];
+  inputNumber.value = rangeNumbers[0];
+
+  btnCalc.addEventListener("click", choiceNumber);
+  btnReset.addEventListener("click", resetGame);
+
+  // ФУНКЦИИ
+
+  // Берет рандомное число
+  function getRandom() {
+    return (
+      Math.floor(
+        Math.random() *
+          (rangeNumbers[rangeNumbers.length - 1] - rangeNumbers[0] + 1)
+      ) + rangeNumbers[0]
     );
   }
 
-  function checkResult() {
-    let currentChoice = document.querySelector("#number").valueAsNumber;
-    let cntScore = parseInt(currentScore.innerHTML);
+  function choiceNumber() {
+    if (isPlayed) return;
 
-    if (cntScore <= 1) {
-      currentScore.innerHTML = 0;
-      return warning();
-    }
-
-    if (currentChoice > randNumber) {
-      result.innerHTML = `Слишком много!`;
-      currentScore.innerHTML = --cntScore;
-    } else if (currentChoice < randNumber) {
-      result.innerHTML = `Слишком мало!`;
-      currentScore.innerHTML = --cntScore;
+    let currentNumber = inputNumber.valueAsNumber;
+    if (currentNumber > randomNumber) {
+      textResult.innerHTML = `Слишком много!`;
+      currentScore.innerHTML -= 1;
+    } else if (currentNumber < randomNumber) {
+      textResult.innerHTML = `Слишком мало!`;
+      currentScore.innerHTML -= 1;
     } else {
-      result.innerHTML = `Точно в цель!`;
-      if (bestScore < cntScore) {
-        bestScoreHTML.innerHTML = cntScore;
-        document.body.style.backgroundColor = `rgba(0, 170, 0, 0.7)`;
+      document.body.style.backgroundColor = "#7DDC1F";
+      titleLayout.innerHTML = currentNumber;
+      textResult.innerHTML = `Ты угадал!`;
+      if (+bestScore.innerHTML < +currentScore.innerHTML) {
+        bestScore.innerHTML = currentScore.innerHTML;
       }
+      isPlayed = true;
+    }
+
+    if (currentScore.innerHTML == 0) {
+      lose();
+      isPlayed = true;
     }
   }
 
-  function warning() {
-    document.body.style.backgroundColor = `red`;
-    result.innerHTML = "Нажми < Сначала! >";
-    document.querySelector(".heading").innerHTML = `Ты проиграл!`;
+  function lose() {
+    document.body.style.backgroundColor = "#f44336";
+    textResult.innerHTML = `Ты проиграл!`;
   }
 
-  check.addEventListener("click", checkResult);
-
-  document.querySelector(".btn-again").addEventListener("click", reset);
+  function resetGame() {
+    document.body.style.backgroundColor = "#000";
+    textResult.innerHTML = `Начни угадывать!`;
+    titleLayout.innerHTML = "???";
+    currentScore.innerHTML = maxTry;
+    randomNumber = getRandom();
+    inputNumber.value = rangeNumbers[0];
+    isPlayed = false;
+  }
 });
